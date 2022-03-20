@@ -1,4 +1,4 @@
-package com.napa.Hospital;
+package com.napa.vehicle;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +50,5 @@ public class ApplicationController {
     public String payroll() {
         return "/payroll/index";
     }
-
 
 }
