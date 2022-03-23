@@ -24,7 +24,14 @@ public class CountryController {
 
     @GetMapping("/countryAdd")
     public String countryAdd() {
-        return "/parameters/countryAdd";
+        return "parameters/countryAdd";
+    }
+
+    @GetMapping("/countryEdit/{id}")
+    public String editCountry(@PathVariable Integer id,Model model) {
+        Country country=countryService.getById(id);
+        model.addAttribute("country",country);
+        return "/parameters/countryEdit";
     }
 
     @PostMapping("/countries")
