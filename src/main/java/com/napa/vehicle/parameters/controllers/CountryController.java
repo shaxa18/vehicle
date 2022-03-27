@@ -15,9 +15,11 @@ public class CountryController {
     @Autowired
     private CountryService countryService;
 
-    @GetMapping("/countries")
-    public String getAll(Model model){
-        List<Country>countries= countryService.findAll();
+    @GetMapping("/parameters/countries")
+    public String getAll(Model model , String keyword){
+
+        List<Country>countries;
+       countries=keyword==null? countryService.findAll():countryService.findByKeyword(keyword);
         model.addAttribute("countries",countries);
         return "parameters/countryList";
     }
