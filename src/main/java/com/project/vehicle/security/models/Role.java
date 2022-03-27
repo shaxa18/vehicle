@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "\"Role\"")
 public class Role extends Auditable<String> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 @MappedSuperclass
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@Table(name = "\"CommonObject\"")
 public class CommonObject{
 	
 	@Id
