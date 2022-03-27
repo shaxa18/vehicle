@@ -54,12 +54,12 @@ public class CountryController {
     @PostMapping("/countries")
     public String save(Country country){
         countryService.save(country);
-        return "redirect:/countries";
+        return "redirect:/parameters/countries";
     }
 
     @RequestMapping(value = "/countries/delete/{id}" ,method = {RequestMethod.GET,RequestMethod.DELETE})
     public String delete(@PathVariable Integer id){
         countryService.delete(id);
-        return "redirect:/countries";
+        return "redirect:/parameters/countries";
     }
 }

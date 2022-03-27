@@ -11,11 +11,6 @@ public class ApplicationController {
         return "index";
     }
 
-    @GetMapping("/error")
-    public String error() {
-        return "error";
-    }
-
     @GetMapping("/_layout")
     public String layout() {
         return "_layout";

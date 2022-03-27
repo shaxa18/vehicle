@@ -1,4 +1,4 @@
-package com.napa.vehicle;
+package com.project.vehicle;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
