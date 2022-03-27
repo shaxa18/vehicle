@@ -17,48 +17,43 @@ public class StateController {
     @Autowired private StateService stateService;
     @Autowired private CountryService countryService;
 
-    public Model addModelAttribute(Model model){
-        model.addAttribute("states",stateService.findAll());
-        model.addAttribute("countries",countryService.findAll());
+    public  Model addModelAttribute(Model model){
+        model.addAttribute("states", stateService.findAll());
+        model.addAttribute("countries", countryService.findAll());
         return model;
     }
 
-    @GetMapping("/states")
+    //Get All States
+    @GetMapping("/parameters/states")
     public String findAll(Model model){
-       addModelAttribute(model);
-        return "parameters/states";
+        addModelAttribute(model);
+        return "/parameters/states";
     }
 
     @GetMapping("/parameters/stateAdd")
-    public String stateAdd(Model model) {
+    public String addState(Model model){
         addModelAttribute(model);
         return "parameters/stateAdd";
     }
 
-    @GetMapping("/stateEdit/{id}")
-    public String editState(@PathVariable Integer id,Model model) {
-        State state=stateService.getById(id);
-        model.addAttribute("state",state);
-        return "/parameters/stateEdit";
-    }
-
-
-    @GetMapping("/parameters/stateDetails/{id}")
-    public String stateDetails(@PathVariable Integer id,Model model) {
+    @GetMapping("/parameters/state/{op}/{id}")
+    public String editState(@PathVariable Integer id, @PathVariable String op, Model model){
         addModelAttribute(model);
-        model.addAttribute("state",stateService.getById(id));
-        return "/parameters/stateDetails";
+        model.addAttribute("state", stateService.getById(id));
+        return "/parameters/state" + op;
     }
 
-    @PostMapping("/states")
-    public String save(State state){
+    //Add State
+    @PostMapping(value="/parameters/states")
+    public String addNew(State state) {
         stateService.save(state);
-        return "redirect:/states";
+        return "redirect:/parameters/states";
     }
 
-    @RequestMapping(value = "/states/delete/{id}" ,method = {RequestMethod.GET,RequestMethod.DELETE})
-    public String delete(@PathVariable Integer id){
+    @RequestMapping(value="/parameters/states/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String delete(@PathVariable Integer id) {
         stateService.delete(id);
-        return "redirect:/states";
+        return "redirect:/parameters/states";
     }
+
 }
