@@ -12,7 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-//@Table(name = "\"User\"")
+@Table(name = "\"User\"")
 public class User {
 
     @Id
