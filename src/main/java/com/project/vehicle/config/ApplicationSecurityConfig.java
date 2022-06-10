@@ -1,4 +1,4 @@
-package com.project.vehicle;
+package com.project.vehicle.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,11 +16,23 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
-
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(bCryptPasswordEncoder());
+        return provider;
+    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -42,21 +54,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login").permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/accessDenied")
-        ;
-    }
-
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-
-        provider.setUserDetailsService(userDetailsService);
-
-        provider.setPasswordEncoder(bCryptPasswordEncoder());
-        return provider;
+                .exceptionHandling().accessDeniedPage("/accessDenied");
     }
 
 }
