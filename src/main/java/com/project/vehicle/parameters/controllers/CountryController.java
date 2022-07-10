@@ -16,11 +16,11 @@ public class CountryController {
     private CountryService countryService;
 
     @GetMapping("/parameters/countries")
-    public String getAll(Model model , String keyword){
+    public String getAll(Model model, String keyword) {
 
-        List<Country>countries;
-       countries=keyword==null? countryService.findAll():countryService.findByKeyword(keyword);
-        model.addAttribute("countries",countries);
+        List<Country> countries;
+        countries = keyword == null ? countryService.findAll() : countryService.findByKeyword(keyword);
+        model.addAttribute("countries", countries);
         return "parameters/countryList";
     }
 

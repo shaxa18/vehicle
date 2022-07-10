@@ -15,7 +15,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Employee extends Person {
+public class Employee extends Person	 {
 		
 	@ManyToOne
 	@JoinColumn(name="employeetypeid", insertable=false, updatable=false)
